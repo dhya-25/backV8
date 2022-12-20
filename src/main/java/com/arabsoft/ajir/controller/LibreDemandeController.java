@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.arabsoft.ajir.dao.CalPersDao;
+import com.arabsoft.ajir.dao.DecidionDao;
 import com.arabsoft.ajir.dao.DemandeDao;
 import com.arabsoft.ajir.dao.GroupePretDao;
 import com.arabsoft.ajir.dao.LibreDemandeBisDao;
@@ -35,6 +36,7 @@ import com.arabsoft.ajir.dao.TypeAutorisationDao;
 import com.arabsoft.ajir.dao.TypeFormationDao;
 import com.arabsoft.ajir.dao.TypePretDao;
 import com.arabsoft.ajir.entities.Cal_Pers;
+import com.arabsoft.ajir.entities.Decision;
 import com.arabsoft.ajir.entities.Groupe_pret;
 import com.arabsoft.ajir.entities.Libre_demande;
 import com.arabsoft.ajir.entities.Libre_demandeBis;
@@ -78,6 +80,8 @@ public class LibreDemandeController {
 	MotifJDao motifJDao;
 	@Autowired
 	LibreDemandeService LibreService;
+	@Autowired
+	DecidionDao decidionDao;
 	  @Autowired
 	  CalPersDao calPersDao;
 	  @CrossOrigin
@@ -108,7 +112,18 @@ public class LibreDemandeController {
 
 		return ResponseEntity.ok(demandeDAO.findAll());
 	}
-	
+	@CrossOrigin
+	@PostMapping("/addDemandeWithoutFile")
+	public ResponseEntity<Libre_demande> addDemande(@RequestBody Libre_demande demande ) {
+
+		return ResponseEntity.ok(demandeDAO.save(demande));
+	}
+	@CrossOrigin
+	@GetMapping("/getDec")
+	public ResponseEntity<List<Decision>> getDecidion() {
+
+		return ResponseEntity.ok(decidionDao.getDecidion());
+	}
 	@CrossOrigin
 	@GetMapping("/getDemandes")
 	public ResponseEntity<List<Libre_demande>> getDemande() {

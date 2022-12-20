@@ -12,6 +12,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
+
 @Table(name = "ADMUSER")
 public class AdmUser implements Serializable{
 

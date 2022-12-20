@@ -210,6 +210,21 @@ return new ResponseEntity<>( HttpStatus.OK);
 	    } else {
 	      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	    } }
+	 
+		
+	 @PutMapping("/updatePass")
+	 
+	  public ResponseEntity<AdmUser> updatePass( @RequestBody AdmUser Ag) {
+	  
+	     Optional<AdmUser> AgData = admUserRep.findById(Ag.getUse_id());
+	    if (AgData.isPresent()) {
+	    	AdmUser agg = AgData.get();
+	   agg.setUse_pswd(encoder.encode(Ag.getUse_pswd()));
+
+	     return new ResponseEntity<>(admUserRep.save(agg), HttpStatus.OK);
+	    } else {
+	      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	    } }
 
 		@CrossOrigin
 		@GetMapping("/{mat}")
@@ -221,6 +236,6 @@ return new ResponseEntity<>( HttpStatus.OK);
 		
 		}
 		
-
+		 
 		
 }
